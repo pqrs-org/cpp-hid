@@ -3,13 +3,13 @@
 
 # cpp-hid
 
-IOKit type definitions.
+HID type definitions.
 
 ## Requirements
 
 cpp-hid depends the following classes.
 
--   [frozen](https://github.com/serge-sans-paille/frozen)
+-   [type_safe](https://github.com/foonathan/type_safe)
 
 ## Install
 
