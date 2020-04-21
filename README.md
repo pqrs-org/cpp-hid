@@ -10,6 +10,7 @@ HID type definitions.
 cpp-hid depends the following classes.
 
 -   [type_safe](https://github.com/foonathan/type_safe)
+-   [pqrs::hash](https://github.com/pqrs-org/cpp-hash)
 
 ## Install
 
