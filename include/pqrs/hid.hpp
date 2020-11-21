@@ -11,4 +11,5 @@
 #include "hid/product_id.hpp"
 #include "hid/usage.hpp"
 #include "hid/usage_page.hpp"
+#include "hid/usage_pair.hpp"
 #include "hid/vendor_id.hpp"

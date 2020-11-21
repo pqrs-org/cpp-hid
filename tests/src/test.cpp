@@ -65,6 +65,16 @@ TEST_CASE("usage") {
   REQUIRE(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
 }
 
+TEST_CASE("usage_pair") {
+  pqrs::hid::usage_pair usage_pair(pqrs::hid::usage_page::generic_desktop,
+                                   pqrs::hid::usage::generic_desktop::keyboard);
+  REQUIRE(usage_pair.get_usage_page() == pqrs::hid::usage_page::generic_desktop);
+  REQUIRE(usage_pair.get_usage() == pqrs::hid::usage::generic_desktop::keyboard);
+
+  std::unordered_map<pqrs::hid::usage_pair, bool> map;
+  map[usage_pair] = true;
+}
+
 TEST_CASE("vendor_id") {
   using t = pqrs::hid::vendor_id::value_t;
 

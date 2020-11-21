@@ -6,6 +6,10 @@ TEST_CASE("nlohmann_json") {
   uint64_t u64 = 13835058055282163712ull; // 2^63 + 2^62
   int32_t i32 = 1610612736;               // 2^30 + 2^29
 
+  //
+  // primitive values
+  //
+
   // country_code
 
   {
@@ -174,5 +178,31 @@ TEST_CASE("nlohmann_json") {
     REQUIRE_THROWS_WITH(
         nlohmann::json("1234").get<t>(),
         "json must be number, but is `\"1234\"`");
+  }
+
+  //
+  // usage_pair
+  //
+
+  {
+    using t = pqrs::hid::usage_pair;
+
+    REQUIRE_THROWS(nlohmann::json::array().get<t>());
+    REQUIRE_THROWS_AS(
+        nlohmann::json().get<t>(),
+        pqrs::json::unmarshal_error);
+    REQUIRE_THROWS_WITH(
+        nlohmann::json().get<t>(),
+        "json must be object, but is `null`");
+
+    auto json = nlohmann::json::object({
+        {"usage_page", 1234},
+        {"usage", 5678},
+    });
+    pqrs::hid::usage_pair usage_pair = json;
+    REQUIRE(usage_pair.get_usage_page() == pqrs::hid::usage_page::value_t(1234));
+    REQUIRE(usage_pair.get_usage() == pqrs::hid::usage::value_t(5678));
+
+    REQUIRE(json.dump() == "{\"usage\":5678,\"usage_page\":1234}");
   }
 }
