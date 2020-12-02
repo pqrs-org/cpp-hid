@@ -63,6 +63,12 @@ TEST_CASE("usage") {
   map[value1] = true;
 
   REQUIRE(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
+
+  {
+    auto u = pqrs::hid::usage::keyboard_or_keypad::keyboard_1;
+    ++u;
+    REQUIRE(u == pqrs::hid::usage::keyboard_or_keypad::keyboard_2);
+  }
 }
 
 TEST_CASE("usage_pair") {
