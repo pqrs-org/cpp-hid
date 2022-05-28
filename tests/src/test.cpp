@@ -1,111 +1,121 @@
-#define CATCH_CONFIG_MAIN
-#include <catch2/catch.hpp>
-
+#include "boost_test.hpp"
+#include "nlohmann_json_test.hpp"
+#include <boost/ut.hpp>
 #include <pqrs/hid.hpp>
 #include <unordered_map>
 #include <unordered_set>
 
-TEST_CASE("country_code") {
-  using t = pqrs::hid::country_code::value_t;
+int main(void) {
+  using namespace boost::ut;
+  using namespace boost::ut::literals;
 
-  t value1(1);
-  t value2(2);
+  "country_code"_test = [] {
+    using t = pqrs::hid::country_code::value_t;
 
-  REQUIRE(value1 != value2);
-  REQUIRE(value1 < value2);
+    t value1(1);
+    t value2(2);
 
-  std::unordered_map<t, bool> map;
-  map[value1] = true;
+    expect(value1 != value2);
+    expect(value1 < value2);
 
-  REQUIRE(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
-}
+    std::unordered_map<t, bool> map;
+    map[value1] = true;
 
-TEST_CASE("product_id") {
-  using t = pqrs::hid::product_id::value_t;
+    expect(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
+  };
 
-  t value1(1);
-  t value2(2);
+  "product_id"_test = [] {
+    using t = pqrs::hid::product_id::value_t;
 
-  REQUIRE(value1 != value2);
-  REQUIRE(value1 < value2);
+    t value1(1);
+    t value2(2);
 
-  std::unordered_map<t, bool> map;
-  map[value1] = true;
+    expect(value1 != value2);
+    expect(value1 < value2);
 
-  REQUIRE(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
-}
+    std::unordered_map<t, bool> map;
+    map[value1] = true;
 
-TEST_CASE("usage_page") {
-  using t = pqrs::hid::usage_page::value_t;
+    expect(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
+  };
 
-  t value1(1);
-  t value2(2);
+  "usage_page"_test = [] {
+    using t = pqrs::hid::usage_page::value_t;
 
-  REQUIRE(value1 != value2);
-  REQUIRE(value1 < value2);
+    t value1(1);
+    t value2(2);
 
-  std::unordered_map<t, bool> map;
-  map[value1] = true;
+    expect(value1 != value2);
+    expect(value1 < value2);
 
-  REQUIRE(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
-}
+    std::unordered_map<t, bool> map;
+    map[value1] = true;
 
-TEST_CASE("usage") {
-  using t = pqrs::hid::usage::value_t;
+    expect(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
+  };
 
-  t value1(1);
-  t value2(2);
+  "usage"_test = [] {
+    using t = pqrs::hid::usage::value_t;
 
-  REQUIRE(value1 != value2);
-  REQUIRE(value1 < value2);
+    t value1(1);
+    t value2(2);
 
-  std::unordered_map<t, bool> map;
-  map[value1] = true;
+    expect(value1 != value2);
+    expect(value1 < value2);
 
-  REQUIRE(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
+    std::unordered_map<t, bool> map;
+    map[value1] = true;
 
-  {
-    auto u = pqrs::hid::usage::keyboard_or_keypad::keyboard_1;
-    ++u;
-    REQUIRE(u == pqrs::hid::usage::keyboard_or_keypad::keyboard_2);
-  }
-}
+    expect(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
 
-TEST_CASE("usage_pair") {
-  pqrs::hid::usage_pair usage_pair(pqrs::hid::usage_page::generic_desktop,
-                                   pqrs::hid::usage::generic_desktop::keyboard);
-  REQUIRE(usage_pair.get_usage_page() == pqrs::hid::usage_page::generic_desktop);
-  REQUIRE(usage_pair.get_usage() == pqrs::hid::usage::generic_desktop::keyboard);
+    {
+      auto u = pqrs::hid::usage::keyboard_or_keypad::keyboard_1;
+      ++u;
+      expect(u == pqrs::hid::usage::keyboard_or_keypad::keyboard_2);
+    }
+  };
 
-  std::unordered_map<pqrs::hid::usage_pair, bool> map;
-  map[usage_pair] = true;
-}
+  "usage_pair"_test = [] {
+    pqrs::hid::usage_pair usage_pair(pqrs::hid::usage_page::generic_desktop,
+                                     pqrs::hid::usage::generic_desktop::keyboard);
+    expect(usage_pair.get_usage_page() == pqrs::hid::usage_page::generic_desktop);
+    expect(usage_pair.get_usage() == pqrs::hid::usage::generic_desktop::keyboard);
 
-TEST_CASE("vendor_id") {
-  using t = pqrs::hid::vendor_id::value_t;
+    std::unordered_map<pqrs::hid::usage_pair, bool> map;
+    map[usage_pair] = true;
+  };
 
-  t value1(1);
-  t value2(2);
+  "vendor_id"_test = [] {
+    using t = pqrs::hid::vendor_id::value_t;
 
-  REQUIRE(value1 != value2);
-  REQUIRE(value1 < value2);
+    t value1(1);
+    t value2(2);
 
-  std::unordered_map<t, bool> map;
-  map[value1] = true;
+    expect(value1 != value2);
+    expect(value1 < value2);
 
-  REQUIRE(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
-}
+    std::unordered_map<t, bool> map;
+    map[value1] = true;
 
-TEST_CASE("pair<usage_page, usage>") {
-  using pair_t = std::pair<pqrs::hid::usage_page::value_t,
-                           pqrs::hid::usage::value_t>;
-  std::unordered_set<pair_t> set;
-  set.insert(std::make_pair(pqrs::hid::usage_page::generic_desktop, pqrs::hid::usage::generic_desktop::keyboard));
-}
+    expect(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
+  };
 
-TEST_CASE("pair<vendor_id, product_id>") {
-  using pair_t = std::pair<pqrs::hid::vendor_id::value_t,
-                           pqrs::hid::product_id::value_t>;
-  std::unordered_set<pair_t> set;
-  set.insert(std::make_pair(pqrs::hid::vendor_id::value_t(0), pqrs::hid::product_id::value_t(0)));
+  "pair<usage_page, usage>"_test = [] {
+    using pair_t = std::pair<pqrs::hid::usage_page::value_t,
+                             pqrs::hid::usage::value_t>;
+    std::unordered_set<pair_t> set;
+    set.insert(std::make_pair(pqrs::hid::usage_page::generic_desktop, pqrs::hid::usage::generic_desktop::keyboard));
+  };
+
+  "pair<vendor_id, product_id>"_test = [] {
+    using pair_t = std::pair<pqrs::hid::vendor_id::value_t,
+                             pqrs::hid::product_id::value_t>;
+    std::unordered_set<pair_t> set;
+    set.insert(std::make_pair(pqrs::hid::vendor_id::value_t(0), pqrs::hid::product_id::value_t(0)));
+  };
+
+  run_boost_test();
+  run_nlohmann_json_test();
+
+  return 0;
 }
