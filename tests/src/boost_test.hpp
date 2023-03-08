@@ -19,6 +19,12 @@ void run_boost_test(void) {
     }
 
     {
+      pqrs::hid::report_id::value_t v(100);
+      expect(std::hash<pqrs::hid::report_id::value_t>{}(v) ==
+             pqrs::hid::report_id::hash_value(v));
+    }
+
+    {
       pqrs::hid::usage_page::value_t v(100);
       expect(std::hash<pqrs::hid::usage_page::value_t>{}(v) ==
              pqrs::hid::usage_page::hash_value(v));

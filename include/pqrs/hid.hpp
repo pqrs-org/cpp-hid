@@ -9,6 +9,7 @@
 #include "hid/country_code.hpp"
 #include "hid/hash.hpp"
 #include "hid/product_id.hpp"
+#include "hid/report_id.hpp"
 #include "hid/usage.hpp"
 #include "hid/usage_page.hpp"
 #include "hid/usage_pair.hpp"

@@ -98,6 +98,22 @@ void run_nlohmann_json_test(void) {
       exception_test<t>();
     }
 
+    // report_id
+
+    {
+      using t = pqrs::hid::report_id::value_t;
+
+      {
+        t value1(i32);
+        nlohmann::json json = value1;
+        auto value2 = json.get<t>();
+        expect(value1 == value2);
+        expect(json.dump() == "1610612736");
+      }
+
+      exception_test<t>();
+    }
+
     // usage_page
 
     {

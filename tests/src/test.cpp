@@ -39,6 +39,21 @@ int main(void) {
     expect(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
   };
 
+  "report_id"_test = [] {
+    using t = pqrs::hid::report_id::value_t;
+
+    t value1(1);
+    t value2(2);
+
+    expect(value1 != value2);
+    expect(value1 < value2);
+
+    std::unordered_map<t, bool> map;
+    map[value1] = true;
+
+    expect(std::hash<t>{}(t(100)) != std::hash<t>{}(t(0)));
+  };
+
   "usage_page"_test = [] {
     using t = pqrs::hid::usage_page::value_t;
 
