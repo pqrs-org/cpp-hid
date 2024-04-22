@@ -9,6 +9,10 @@ int main(void) {
   using namespace boost::ut;
   using namespace boost::ut::literals;
 
+  //
+  // number values
+  //
+
   "country_code"_test = [] {
     using t = pqrs::hid::country_code::value_t;
 
@@ -89,6 +93,42 @@ int main(void) {
       expect(u == pqrs::hid::usage::keyboard_or_keypad::keyboard_2);
     }
   };
+
+  //
+  // string values
+  //
+
+  "manufacturer_string"_test = [] {
+    using t = pqrs::hid::manufacturer_string::value_t;
+
+    t value1("m1");
+    t value2("m2");
+
+    expect(value1 != value2);
+
+    std::unordered_map<t, bool> map;
+    map[value1] = true;
+
+    expect(std::hash<t>{}(t("m100")) != std::hash<t>{}(t("m0")));
+  };
+
+  "product_string"_test = [] {
+    using t = pqrs::hid::product_string::value_t;
+
+    t value1("p1");
+    t value2("p2");
+
+    expect(value1 != value2);
+
+    std::unordered_map<t, bool> map;
+    map[value1] = true;
+
+    expect(std::hash<t>{}(t("p100")) != std::hash<t>{}(t("p0")));
+  };
+
+  //
+  // usage_pair
+  //
 
   "usage_pair"_test = [] {
     pqrs::hid::usage_pair usage_pair(pqrs::hid::usage_page::generic_desktop,

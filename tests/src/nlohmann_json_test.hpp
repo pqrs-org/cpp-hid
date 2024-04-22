@@ -6,12 +6,12 @@ using namespace boost::ut;
 using namespace boost::ut::literals;
 
 template <typename t>
-void exception_test(void) {
+void number_value_exception_test(void) {
   try {
     nlohmann::json().get<t>();
     expect(false);
   } catch (pqrs::json::unmarshal_error& ex) {
-    expect(std::string("json must be number, but is `null`") == ex.what());
+    expect(std::string_view("json must be number, but is `null`") == ex.what());
   } catch (...) {
     expect(false);
   }
@@ -20,7 +20,7 @@ void exception_test(void) {
     nlohmann::json(true).get<t>();
     expect(false);
   } catch (pqrs::json::unmarshal_error& ex) {
-    expect(std::string("json must be number, but is `true`") == ex.what());
+    expect(std::string_view("json must be number, but is `true`") == ex.what());
   } catch (...) {
     expect(false);
   }
@@ -29,7 +29,7 @@ void exception_test(void) {
     nlohmann::json::object().get<t>();
     expect(false);
   } catch (pqrs::json::unmarshal_error& ex) {
-    expect(std::string("json must be number, but is `{}`") == ex.what());
+    expect(std::string_view("json must be number, but is `{}`") == ex.what());
   } catch (...) {
     expect(false);
   }
@@ -38,7 +38,7 @@ void exception_test(void) {
     nlohmann::json::array().get<t>();
     expect(false);
   } catch (pqrs::json::unmarshal_error& ex) {
-    expect(std::string("json must be number, but is `[]`") == ex.what());
+    expect(std::string_view("json must be number, but is `[]`") == ex.what());
   } catch (...) {
     expect(false);
   }
@@ -47,7 +47,55 @@ void exception_test(void) {
     nlohmann::json("1234").get<t>();
     expect(false);
   } catch (pqrs::json::unmarshal_error& ex) {
-    expect(std::string("json must be number, but is `\"1234\"`") == ex.what());
+    expect(std::string_view("json must be number, but is `\"1234\"`") == ex.what());
+  } catch (...) {
+    expect(false);
+  }
+}
+
+template <typename t>
+void string_value_exception_test(void) {
+  try {
+    nlohmann::json().get<t>();
+    expect(false);
+  } catch (pqrs::json::unmarshal_error& ex) {
+    expect(std::string_view("json must be string, but is `null`") == ex.what());
+  } catch (...) {
+    expect(false);
+  }
+
+  try {
+    nlohmann::json(true).get<t>();
+    expect(false);
+  } catch (pqrs::json::unmarshal_error& ex) {
+    expect(std::string_view("json must be string, but is `true`") == ex.what());
+  } catch (...) {
+    expect(false);
+  }
+
+  try {
+    nlohmann::json::object().get<t>();
+    expect(false);
+  } catch (pqrs::json::unmarshal_error& ex) {
+    expect(std::string_view("json must be string, but is `{}`") == ex.what());
+  } catch (...) {
+    expect(false);
+  }
+
+  try {
+    nlohmann::json::array().get<t>();
+    expect(false);
+  } catch (pqrs::json::unmarshal_error& ex) {
+    expect(std::string_view("json must be string, but is `[]`") == ex.what());
+  } catch (...) {
+    expect(false);
+  }
+
+  try {
+    nlohmann::json(1234).get<t>();
+    expect(false);
+  } catch (pqrs::json::unmarshal_error& ex) {
+    expect(std::string_view("json must be string, but is `1234`") == ex.what());
   } catch (...) {
     expect(false);
   }
@@ -63,7 +111,7 @@ void run_nlohmann_json_test(void) {
     int32_t i32 = 1610612736;               // 2^30 + 2^29
 
     //
-    // primitive values
+    // number values
     //
 
     // country_code
@@ -79,7 +127,7 @@ void run_nlohmann_json_test(void) {
         expect(json.dump() == "13835058055282163712");
       }
 
-      exception_test<t>();
+      number_value_exception_test<t>();
     }
 
     // product_id
@@ -95,7 +143,7 @@ void run_nlohmann_json_test(void) {
         expect(json.dump() == "13835058055282163712");
       }
 
-      exception_test<t>();
+      number_value_exception_test<t>();
     }
 
     // report_id
@@ -111,7 +159,7 @@ void run_nlohmann_json_test(void) {
         expect(json.dump() == "1610612736");
       }
 
-      exception_test<t>();
+      number_value_exception_test<t>();
     }
 
     // usage_page
@@ -127,7 +175,7 @@ void run_nlohmann_json_test(void) {
         expect(json.dump() == "1610612736");
       }
 
-      exception_test<t>();
+      number_value_exception_test<t>();
     }
 
     // usage
@@ -143,7 +191,7 @@ void run_nlohmann_json_test(void) {
         expect(json.dump() == "1610612736");
       }
 
-      exception_test<t>();
+      number_value_exception_test<t>();
     }
 
     // vendor_id
@@ -159,7 +207,39 @@ void run_nlohmann_json_test(void) {
         expect(json.dump() == "13835058055282163712");
       }
 
-      exception_test<t>();
+      number_value_exception_test<t>();
+    }
+
+    //
+    // string values
+    //
+
+    {
+      using t = pqrs::hid::manufacturer_string::value_t;
+
+      {
+        t value1("m1");
+        nlohmann::json json = value1;
+        auto value2 = json.get<t>();
+        expect(value1 == value2);
+        expect(json.dump() == "\"m1\"");
+      }
+
+      string_value_exception_test<t>();
+    }
+
+    {
+      using t = pqrs::hid::product_string::value_t;
+
+      {
+        t value1("p1");
+        nlohmann::json json = value1;
+        auto value2 = json.get<t>();
+        expect(value1 == value2);
+        expect(json.dump() == "\"p1\"");
+      }
+
+      string_value_exception_test<t>();
     }
 
     //
@@ -173,7 +253,7 @@ void run_nlohmann_json_test(void) {
         nlohmann::json().get<t>();
         expect(false);
       } catch (pqrs::json::unmarshal_error& ex) {
-        expect(std::string("json must be object, but is `null`") == ex.what());
+        expect(std::string_view("json must be object, but is `null`") == ex.what());
       } catch (...) {
         expect(false);
       }
@@ -182,7 +262,7 @@ void run_nlohmann_json_test(void) {
         nlohmann::json::array().get<t>();
         expect(false);
       } catch (pqrs::json::unmarshal_error& ex) {
-        expect(std::string("json must be object, but is `[]`") == ex.what());
+        expect(std::string_view("json must be object, but is `[]`") == ex.what());
       } catch (...) {
         expect(false);
       }
