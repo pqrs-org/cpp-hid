@@ -56,6 +56,7 @@ constexpr value_t slider(0x36);
 constexpr value_t dial(0x37);
 constexpr value_t wheel(0x38);
 constexpr value_t hat_switch(0x39);
+constexpr value_t system_sleep(0x82);
 constexpr value_t dpad_up(0x90);
 constexpr value_t dpad_down(0x91);
 constexpr value_t dpad_right(0x92);
