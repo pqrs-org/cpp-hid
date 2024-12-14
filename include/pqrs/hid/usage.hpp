@@ -347,6 +347,7 @@ constexpr value_t volume_increment(0x00e9);
 constexpr value_t volume_decrement(0x00ea);
 constexpr value_t bass_boost(0x00e5);
 constexpr value_t bass_decrement(0x0153);
+constexpr value_t loudness(0x00e7);
 
 // application launch buttons
 
