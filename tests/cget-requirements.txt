@@ -1,4 +1,0 @@
-boost-ext/ut
-foonathan/type_safe
-pqrs-org/cpp-hash
-pqrs-org/cpp-json
