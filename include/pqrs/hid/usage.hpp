@@ -664,6 +664,7 @@ constexpr value_t ac_bookmarks(0x022a);
 constexpr value_t ac_zoom_out(0x22d);
 constexpr value_t ac_zoom_in(0x22e);
 constexpr value_t ac_pan(0x0238); // Horizontal mouse wheel
+constexpr value_t ac_keyboard_layout_select(0x029d);
 
 } // namespace consumer
 
