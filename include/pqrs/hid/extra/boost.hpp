@@ -7,45 +7,40 @@
 #include <pqrs/hid.hpp>
 
 namespace pqrs::hid {
+namespace detail {
+template <typename T>
+  requires type_safe::is_strong_typedef<T>::value
+inline std::size_t hash_value(const T& value) {
+  return std::hash<T>{}(value);
+}
+} // namespace detail
 
 //
 // number values
 //
 
 namespace country_code {
-inline std::size_t hash_value(const value_t& value) {
-  return std::hash<value_t>{}(value);
-}
+using detail::hash_value;
 } // namespace country_code
 
 namespace product_id {
-inline std::size_t hash_value(const value_t& value) {
-  return std::hash<value_t>{}(value);
-}
+using detail::hash_value;
 } // namespace product_id
 
 namespace report_id {
-inline std::size_t hash_value(const value_t& value) {
-  return std::hash<value_t>{}(value);
-}
+using detail::hash_value;
 } // namespace report_id
 
 namespace usage_page {
-inline std::size_t hash_value(const value_t& value) {
-  return std::hash<value_t>{}(value);
-}
+using detail::hash_value;
 } // namespace usage_page
 
 namespace usage {
-inline std::size_t hash_value(const value_t& value) {
-  return std::hash<value_t>{}(value);
-}
+using detail::hash_value;
 } // namespace usage
 
 namespace vendor_id {
-inline std::size_t hash_value(const value_t& value) {
-  return std::hash<value_t>{}(value);
-}
+using detail::hash_value;
 } // namespace vendor_id
 
 //
@@ -53,15 +48,11 @@ inline std::size_t hash_value(const value_t& value) {
 //
 
 namespace manufacturer_string {
-inline std::size_t hash_value(const value_t& value) {
-  return std::hash<value_t>{}(value);
-}
+using detail::hash_value;
 } // namespace manufacturer_string
 
 namespace product_string {
-inline std::size_t hash_value(const value_t& value) {
-  return std::hash<value_t>{}(value);
-}
+using detail::hash_value;
 } // namespace product_string
 
 //
