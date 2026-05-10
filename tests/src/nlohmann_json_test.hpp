@@ -6,7 +6,7 @@ using namespace boost::ut;
 using namespace boost::ut::literals;
 
 template <typename t>
-void number_value_exception_test(void) {
+void number_value_exception_test() {
   try {
     nlohmann::json().get<t>();
     expect(false);
@@ -54,7 +54,7 @@ void number_value_exception_test(void) {
 }
 
 template <typename t>
-void string_value_exception_test(void) {
+void string_value_exception_test() {
   try {
     nlohmann::json().get<t>();
     expect(false);
@@ -102,7 +102,7 @@ void string_value_exception_test(void) {
 }
 } // namespace
 
-void run_nlohmann_json_test(void) {
+void run_nlohmann_json_test() {
   using namespace boost::ut;
   using namespace boost::ut::literals;
 

@@ -10,7 +10,7 @@
 namespace pqrs::hid {
 class usage_pair final {
 public:
-  constexpr usage_pair(void)
+  constexpr usage_pair()
       : usage_page_(usage_page::undefined),
         usage_(usage::undefined) {
   }
@@ -21,7 +21,7 @@ public:
         usage_(usage) {
   }
 
-  usage_page::value_t get_usage_page(void) const {
+  usage_page::value_t get_usage_page() const {
     return usage_page_;
   }
 
@@ -30,7 +30,7 @@ public:
     return *this;
   }
 
-  usage::value_t get_usage(void) const {
+  usage::value_t get_usage() const {
     return usage_;
   }
 
