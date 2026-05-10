@@ -7,8 +7,7 @@
 #include "usage.hpp"
 #include "usage_page.hpp"
 
-namespace pqrs {
-namespace hid {
+namespace pqrs::hid {
 class usage_pair final {
 public:
   constexpr usage_pair(void)
@@ -46,8 +45,7 @@ private:
   usage_page::value_t usage_page_;
   usage::value_t usage_;
 };
-} // namespace hid
-} // namespace pqrs
+} // namespace pqrs::hid
 
 //
 // hash

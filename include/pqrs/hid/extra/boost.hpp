@@ -6,8 +6,7 @@
 
 #include <pqrs/hid.hpp>
 
-namespace pqrs {
-namespace hid {
+namespace pqrs::hid {
 
 //
 // number values
@@ -80,5 +79,4 @@ inline std::size_t hash_value(const std::pair<usage_page::value_t, usage::value_
 inline std::size_t hash_value(const std::pair<vendor_id::value_t, product_id::value_t>& value) {
   return std::hash<std::pair<vendor_id::value_t, product_id::value_t>>{}(value);
 }
-} // namespace hid
-} // namespace pqrs
+} // namespace pqrs::hid

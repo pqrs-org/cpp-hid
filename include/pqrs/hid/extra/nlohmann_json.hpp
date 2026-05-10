@@ -7,8 +7,7 @@
 #include <pqrs/hid.hpp>
 #include <pqrs/json.hpp>
 
-namespace pqrs {
-namespace hid {
+namespace pqrs::hid {
 
 //
 // number values
@@ -141,5 +140,4 @@ inline void from_json(const nlohmann::json& j, usage_pair& usage_pair) {
   }
 }
 
-} // namespace hid
-} // namespace pqrs
+} // namespace pqrs::hid
