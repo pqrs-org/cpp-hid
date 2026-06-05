@@ -663,6 +663,11 @@ constexpr value_t ac_zoom_out(0x22d);
 constexpr value_t ac_zoom_in(0x22e);
 constexpr value_t ac_pan(0x0238); // Horizontal mouse wheel
 constexpr value_t ac_keyboard_layout_select(0x029d);
+constexpr value_t ac_desktop_show_all_windows(0x29f);
+// ac_soft_key_left and ac_desktop_show_all_applications had conflicting codes
+// fixed in HUTRR97, but some keyboards still use the old value so support it
+constexpr value_t ac_soft_key_left(0x2a0);
+constexpr value_t ac_desktop_show_all_applications(0x2a2);
 
 } // namespace consumer
 
