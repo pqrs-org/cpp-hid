@@ -276,6 +276,21 @@ void run_nlohmann_json_test() {
       expect(usage_pair.get_usage() == pqrs::hid::usage::value_t(5678));
 
       expect(json.dump() == "{\"usage\":5678,\"usage_page\":1234}");
+
+      nlohmann::json serialized = usage_pair;
+      expect(serialized.dump() == "{\"usage\":5678,\"usage_page\":1234}");
+
+      try {
+        nlohmann::json::object({
+                                   {"unknown", 0},
+                               })
+            .get<t>();
+        expect(false);
+      } catch (pqrs::json::unmarshal_error& ex) {
+        expect(std::string_view("unknown key: `unknown`") == ex.what());
+      } catch (...) {
+        expect(false);
+      }
     }
   };
 }
