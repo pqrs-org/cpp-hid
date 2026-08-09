@@ -3,7 +3,7 @@
 
 # cpp-hid
 
-HID type definitions.
+HID type definitions and HID report descriptor parser.
 
 ## Requirements
 

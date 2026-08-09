@@ -1,5 +1,6 @@
 #include "boost_test.hpp"
 #include "nlohmann_json_test.hpp"
+#include "report_descriptor_test.hpp"
 #include <boost/ut.hpp>
 #include <pqrs/hid.hpp>
 #include <unordered_map>
@@ -171,6 +172,7 @@ int main() {
 
   run_boost_test();
   run_nlohmann_json_test();
+  run_report_descriptor_test();
 
   return 0;
 }

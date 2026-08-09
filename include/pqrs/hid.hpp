@@ -11,6 +11,8 @@
 #include "hid/manufacturer_string.hpp"
 #include "hid/product_id.hpp"
 #include "hid/product_string.hpp"
+#include "hid/report_descriptor/descriptor.hpp"
+#include "hid/report_descriptor/parser.hpp"
 #include "hid/report_id.hpp"
 #include "hid/usage.hpp"
 #include "hid/usage_page.hpp"
